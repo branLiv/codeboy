@@ -1,0 +1,28 @@
+{
+  "name": "codeboy",
+  "version": "1.0.0",
+  "description": "practice for tedu student",
+  "main": "main.js",
+  "scripts": {
+    "test": "node ./test.js",
+    "start": "node ./main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/branLiv/codeboy.git"
+  },
+  "keywords": [
+    "practice",
+    "tedu",
+    "codeboy"
+  ],
+  "author": "branliv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/branLiv/codeboy/issues"
+  },
+  "homepage": "https://github.com/branLiv/codeboy#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
