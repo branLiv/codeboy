@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const user = require("routes/user.js");
-const product = require("routes/product.js");
+const user = require("./routes/user.js");
+// const product = require("routes/product.js");
 var server=express();
 var port=3000;
 server.listen(port,()=>{
@@ -14,4 +14,4 @@ server.use(bodyParser.urlencoded({
 //挂在用户路由器
 server.use("/user",user);
 //挂在商品路由器
-server.use("/product",product);
+// server.use("/product",product);
