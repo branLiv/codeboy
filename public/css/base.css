@@ -1,0 +1,23 @@
+body{
+    background:#f5f5f5 !important;
+}
+.my_head iframe,.my_foot iframe{width:100%;}
+
+
+
+
+
+@media screen and (min-width:992px){
+    .my_head iframe{height:12rem;}
+    .my_foot iframe{height:26rem;}
+}
+
+@media screen and (max-width:991px) and (min-width:768px){
+    .my_head iframe{height:15rem;}
+    .my_foot iframe{height:25rem;}
+}
+
+@media screen and (max-width:767px){
+    .my_head iframe{height:17rem;}
+    .my_foot iframe{height:38rem;}
+}

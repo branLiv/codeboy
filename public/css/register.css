@@ -1,0 +1,22 @@
+.my_a{
+    color:#fff;
+    font-size: 0.8rem;
+    font-weight:500;
+}
+.my_a:hover{
+    text-decoration:none;
+    color:#aaa;
+    font-weight:800;
+}
+
+.my_reg_bg{
+    background-image:url("../img/bg.png");
+    background-repeat:no-repeat;
+    height:30rem;
+}
+.my_reg{
+    background:rgba(0,0,0,0.3);
+    height:20rem;
+    width:30rem;
+
+}

@@ -1,0 +1,29 @@
+.my_input{
+    width:20rem;
+    height:2.25rem;
+}
+.my_search{
+    width:2.45rem !important;
+}
+.my_bread{width:15rem;}
+.my_a{
+    color:#808080;
+    font-size: 0.8rem;
+    font-weight:500;
+}
+.my_a:hover{
+    text-decoration:none;
+    color:#666;
+    font-weight:800;
+}
+.my_a2{
+    color:#808080;
+    font-size: 0.6rem;
+    font-weight:500;
+}
+.my_a2:hover{
+    text-decoration:none;
+    color:#666;
+    font-weight:800;
+}
+.my_size{font-size:0.8rem;}
