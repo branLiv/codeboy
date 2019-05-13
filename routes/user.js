@@ -12,7 +12,19 @@ router.post("/register",(req,res)=>{
     })
 })
 
-
+//2、用户名是否存在验证
+router.get("/check",(req,res)=>{
+    pool.query("select * from xz_user where uname=?",[req.query.uname],(err,result)=>{
+        if(err) throw err;
+        if(result.length>0){
+            res.send("0");
+            console.log("用户已存在");
+        }else{
+            res.send("1");
+            console.log("用户名可用！");
+        }
+    })
+})
 
 
 module.exports=router;

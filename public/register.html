@@ -21,6 +21,7 @@
 <div class="container">
     <div class="my_reg_bg">
         <div class="my_reg row mr-5">
+            <!-- 左 输入区 -->
             <div class="col-8 p-0">
                 <div class="d-flex justify-content-between pt-3 pb-3 pl-3">
                     <span class="text-white h5">新用户注册</span>
@@ -29,22 +30,19 @@
                 <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1">用户名：</div>
                     <div class="col-8 p-0">
-                        <input id="uname" onblur="onblur_uname()" type="text" class="form-control" placeholder="请输入用户名"/>
-                    </div>
-                    <div class="col-4 p-0">
-                        <p class="my_font" id="unameMsg"></p>
+                        <input id="uname" onblur="onblur_uname()" onfocus="onfocus_uname()" type="text" class="form-control" placeholder="请输入用户名"/>
                     </div>
                 </div>
                 <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1 ">登陆密码：</div>
                     <div class="col-8 p-0">
-                        <input type="text" class="form-control" placeholder="请输入密码"/>
+                        <input type="text" id="upwd1" onblur="onblur_upwd1()" onfocus="onfocus_upwd1()" class="form-control" placeholder="请输入密码"/>
                     </div>
                 </div>
                 <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1 ">确认密码：</div>
                     <div class="col-8 p-0">
-                        <input type="text" class="form-control" placeholder="请输入密码"/>
+                        <input type="text" id="upwd2" onblur="onblur_upwd2()" onfocus="onfocus_upwd2()" class="form-control" placeholder="请输入密码"/>
                     </div>
                 </div>
                 <div class="row ml-0 mr-0 mb-4">
@@ -66,8 +64,27 @@
                         <input type="button" class="btn btn-info btn-block" value="提交注册信息"/>
                     </div>
                 </div>
-
             </div>
+            <!-- 右 验证区 -->
+            <div class="col-4 p-0 mt-5 pt-4 pl-2">
+                <div class="my_check_div">
+                    <p class="my_font text-white" id="unameMsg"></p>
+                </div>
+                <div class="my_check_div">
+                    <p class="my_font text-white" id="upwd1Msg"></p>
+                </div>
+                <div class="my_check_div">
+                    <p class="my_font text-white" 
+                    id="upwd2Msg"></p>
+                </div>
+                <div class="my_check_div">
+                    <p class="my_font text-white" 
+                    id="upwd2Msg"></p>
+                </div>
+                <div class="my_check_div">
+                    <p class="my_font text-white" 
+                    id="upwd2Msg"></p>
+                </div>
         </div>
     </div>
 </div>
@@ -75,18 +92,56 @@
 <footer class="my_foot border">
     <iframe src="./foot.html" scrolling="no" frameborder="0"></iframe>
 </footer>
+<!-- 脚本区 -->
 <script>
-    function onblur_user(){
-        if(!uname.value){unameMsg.innerHTML="用户名不能为空";}
-        var xhr=XMLHttpRequest();
+    var is_uname=0,is_upwd=0;
+    function onblur_uname(){
+        if(!uname.value){
+            unameMsg.innerHTML="用户名不能为空";
+            is_uname=0;
+            return;
+        }
+        var xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4&&xhr.status==200){
-
+                var result=xhr.responseText;
+                console.log(result);
+                if(result=="0"){
+                    unameMsg.innerHTML="该用户已存在";
+                    is_uname=0;
+                }else if(result=="1"){
+                    unameMsg.innerHTML="用户名可以使用";
+                    is_uname=1;
+                }
             }
         };
         xhr.open("get","/user/check?uname="+uname.value,true);
         xhr.send();
     }
+    function onblur_upwd1(){
+        if(!upwd1.value){
+            upwd1.innerHTML="密码不能为空";
+            is_upwd=0;
+            return;
+        }else{upwd1Msg.innerHTML="";}
+    }
+    function onblur_upwd2(){
+        if(!upwd2.value){
+            upwd2Msg.innerHTML="密码不能为空";
+            is_upwd=0;
+            return;
+        }else if(upwd1.value!=upwd2.value){
+            upwd2Msg.innerHTML="密码不一致";
+            is_upwd=0;
+            return;
+        }else{
+            upwd2Msg.innerHTML="密码一致";
+            is_upwd=1;
+        }
+    }
+    function onfocus_uname(){unameMsg.innerHTML="用户名长度6~9位";}
+    function onfocus_upwd1(){upwd1Msg.innerHTML="密码长度8~12位";}
+    function onfocus_upwd2(){upwd2Msg.innerHTML="密码长度8~12位";}
 </script>
 </body>
 </html>
