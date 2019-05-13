@@ -12,13 +12,16 @@
 .my_reg_bg{
     background-image:url("../img/bg.png");
     background-repeat:no-repeat;
-    height:40rem;
+    background-attachment:fixed;
+    background-size:cover;
+    height:35rem;
     display: flex;
     justify-content: flex-end;
 }
 .my_reg{
     background:rgba(0,0,0,0.3);
-    height:31rem;
+    border-radius:3%;
+    height:30rem;
     width:30rem;
     margin-top:2rem;
 }
