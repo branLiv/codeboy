@@ -4,7 +4,7 @@ var router=express.Router();
 
 //1、用户注册
 router.post("/register",(req,res)=>{
-    pool.query("insert into xz_user values ?",[null,req.body.uname,req.body.upwd,req.body.email,req.body.phone,req.body.avatar,req.body.user_name,req.body.gender],(err,result)=>{
+    pool.query("insert into xz_user set ?",[req.body],(err,result)=>{
         if (err) throw err;
         if(result.affectedRows>0){
             res.send("1");
@@ -26,5 +26,17 @@ router.get("/check",(req,res)=>{
     })
 })
 
+//3、手机号是否存在验证
+router.get("/check_phone",(req,res)=>{
+    pool.query("select * from xz_user where phone=?",[req.query.phone],(err,result)=>{
+        if(err) throw err;
+        if(result.length>0){
+            res.send("0");
+            console.log("手机号已存在");
+        }else{
+            res.send("1");
+        }
+    })
+})
 
 module.exports=router;

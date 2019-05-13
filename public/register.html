@@ -23,7 +23,7 @@
         <div class="my_reg row mr-5">
             <!-- 左 输入区 -->
             <div class="col-8 p-0">
-                <div class="d-flex justify-content-between pt-3 pb-3 pl-3">
+                <div class="d-flex justify-content-between pt-4 pb-4 pl-3">
                     <span class="text-white h5">新用户注册</span>
                     <span><a href="#" class="my_a">直接登陆</a></span>
                 </div>
@@ -48,20 +48,20 @@
                 <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1 ">邮箱：</div>
                     <div class="col-8 p-0">
-                        <input type="text" class="form-control" placeholder="请输入邮箱地址"/>
+                        <input type="text" id="email" onblur="onblur_email()" onfocus="onfocus_email()" class="form-control" placeholder="请输入邮箱地址"/>
                     </div>
                 </div>
                 <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1 ">手机号：</div>
                     <div class="col-8 p-0">
-                        <input type="text" class="form-control" placeholder="请输入您的手机号"/>
+                        <input type="text" id="phone" onblur="onblur_phone()" onfocus="onfocus_phone()" class="form-control" placeholder="请输入您的手机号"/>
                     </div>
                 </div>
 
-                <div class="row ml-0 mr-0 mb-4 mt-5">
+                <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1 "></div>
                     <div class="col-8 p-0">
-                        <input type="button" class="btn btn-info btn-block" value="提交注册信息"/>
+                        <input type="button" onclick="register()" class="btn btn-info btn-block" value="提交注册信息"/>
                     </div>
                 </div>
             </div>
@@ -79,11 +79,15 @@
                 </div>
                 <div class="my_check_div">
                     <p class="my_font text-white" 
-                    id="upwd2Msg"></p>
+                    id="emailMsg"></p>
                 </div>
                 <div class="my_check_div">
                     <p class="my_font text-white" 
-                    id="upwd2Msg"></p>
+                    id="phoneMsg"></p>
+                </div>
+                <div class="my_check_div mt-4">
+                    <p class="my_font text-white" 
+                    id="registerMsg"></p>
                 </div>
         </div>
     </div>
@@ -120,7 +124,7 @@
     }
     function onblur_upwd1(){
         if(!upwd1.value){
-            upwd1.innerHTML="密码不能为空";
+            upwd1Msg.innerHTML="密码不能为空";
             is_upwd=0;
             return;
         }else{upwd1Msg.innerHTML="";}
@@ -139,9 +143,59 @@
             is_upwd=1;
         }
     }
+    function onblur_email(){
+        if(!email.value){
+            emailMsg.innerHTML="邮箱不能为空";
+            return;
+        }else{emailMsg.innerHTML="";}
+    }
+    function onblur_phone(){
+        if(!phone.value){
+            phoneMsg.innerHTML="手机号不能为空";
+            return;
+        }
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){};
+        xhr.open("get","/user/check_phone?phone="+phone.value,true);
+        xhr.send();
+    }
     function onfocus_uname(){unameMsg.innerHTML="用户名长度6~9位";}
     function onfocus_upwd1(){upwd1Msg.innerHTML="密码长度8~12位";}
     function onfocus_upwd2(){upwd2Msg.innerHTML="密码长度8~12位";}
+    function onfocus_email(){emailMsg.innerHTML="请输入正确的邮箱地址";}
+    function onfocus_phone(){phoneMsg.innerHTML="手机号11位";}
+
+    function register(){
+        onblur_uname();
+        onblur_upwd2();
+        onblur_email();
+        onblur_phone();
+        if(!is_uname||!is_upwd){
+            registerMsg.innerHTML="提交失败";
+            return;
+        }
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                console.log(result);
+                if(result=="1"){
+                    registerMsg="注册成功";
+                }else{
+                    registerMsg="注册失败";
+                }
+            }
+        };
+        xhr.open("post","/user/register",true);
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        var formdata=`
+        uname=${uname.value}
+        &upwd=${upwd1.value}
+        &email=${email.value}
+        &phone=${phone.value}
+        `;
+        xhr.send(formdata);
+    }
 </script>
 </body>
 </html>
