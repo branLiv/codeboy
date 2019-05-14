@@ -4,8 +4,10 @@ var router=express.Router();
 
 //1、用户注册
 router.post("/register",(req,res)=>{
-    pool.query("insert into xz_user set ?",[req.body],(err,result)=>{
+    console.log(req.body);
+    pool.query("insert into xz_user values(null,?,?,?,?,null,null,null)",[req.body.uname,req.body.upwd,req.body.email,req.body.phone],(err,result)=>{
         if (err) throw err;
+        console.log(result);
         if(result.affectedRows>0){
             res.send("1");
         }

@@ -77,7 +77,7 @@
                     <p class="my_font text-white" 
                     id="upwd2Msg"></p>
                 </div>
-                <div class="my_check_div">
+                <div class="my_check_div pt-1">
                     <p class="my_font text-white" 
                     id="emailMsg"></p>
                 </div>
@@ -98,7 +98,7 @@
 </footer>
 <!-- 脚本区 -->
 <script>
-    var is_uname=0,is_upwd=0;
+    var is_uname=0,is_upwd=0,is_phone=0;
     function onblur_uname(){
         if(!uname.value){
             unameMsg.innerHTML="用户名不能为空";
@@ -109,7 +109,7 @@
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4&&xhr.status==200){
                 var result=xhr.responseText;
-                console.log(result);
+                // console.log(result);
                 if(result=="0"){
                     unameMsg.innerHTML="该用户已存在";
                     is_uname=0;
@@ -152,10 +152,21 @@
     function onblur_phone(){
         if(!phone.value){
             phoneMsg.innerHTML="手机号不能为空";
+            is_phone=0;
             return;
         }
         var xhr=new XMLHttpRequest();
-        xhr.onreadystatechange=function(){};
+        xhr.onreadystatechange=function(){
+            // console.log(xhr);
+            if(xhr.readyState==4&&xhr.status==200){
+                var result=xhr.responseText;
+                if(result=="0"){
+                    phoneMsg.innerHTML="手机号已存在";
+                    is_phone=0;
+                    return;
+                }else{phoneMsg.innerHTML="";is_phone=1;}
+            }
+        };
         xhr.open("get","/user/check_phone?phone="+phone.value,true);
         xhr.send();
     }
@@ -170,7 +181,7 @@
         onblur_upwd2();
         onblur_email();
         onblur_phone();
-        if(!is_uname||!is_upwd){
+        if(!is_uname||!is_upwd||!is_phone){
             registerMsg.innerHTML="提交失败";
             return;
         }
@@ -178,22 +189,18 @@
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4&&xhr.status==200){
                 var result=xhr.responseText;
-                console.log(result);
+                // console.log(result);
                 if(result=="1"){
-                    registerMsg="注册成功";
+                    registerMsg.innerHTML="注册成功";
                 }else{
-                    registerMsg="注册失败";
+                    registerMsg.innerHTML="注册失败";
+                    return;
                 }
             }
         };
         xhr.open("post","/user/register",true);
         xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        var formdata=`
-        uname=${uname.value}
-        &upwd=${upwd1.value}
-        &email=${email.value}
-        &phone=${phone.value}
-        `;
+        var formdata=`uname=${uname.value}&upwd=${upwd1.value}&email=${email.value}&phone=${phone.value}`;
         xhr.send(formdata);
     }
 </script>
