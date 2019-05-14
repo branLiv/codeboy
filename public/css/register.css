@@ -13,7 +13,8 @@
     background-image:url("../img/bg.png");
     background-repeat:no-repeat;
     background-attachment:fixed;
-    background-size:cover;
+    background-position-y: 44%;
+    /* background-size:cover; */
     height:35rem;
     display: flex;
     justify-content: flex-end;
