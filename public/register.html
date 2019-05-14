@@ -192,6 +192,10 @@
                 // console.log(result);
                 if(result=="1"){
                     registerMsg.innerHTML="注册成功";
+                    onblur_uname();
+                    onblur_upwd2();
+                    onblur_email();
+                    onblur_phone();
                 }else{
                     registerMsg.innerHTML="注册失败";
                     return;
