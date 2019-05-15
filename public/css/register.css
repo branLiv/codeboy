@@ -1,3 +1,4 @@
+/*×¢²á*/
 .my_a{
     color:#fff;
     font-size: 0.8rem;
@@ -30,4 +31,20 @@
     height:2rem;
     margin-bottom:1.8rem;
     margin-top:1rem;
+}
+/*µÇÂ¼*/
+.my_log{
+    background:rgba(0,0,0,0.3);
+    width:16rem;
+    height:20rem;
+    border-radius:3%;
+    margin-top:5rem;
+}
+.my_input1,.my_input2{
+    background-image:url("http://www.codeboy.com/img/login/yhm.png");
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+}
+.my_input2{
+    background-image:url("http://www.codeboy.com/img/login/mm.png");
 }

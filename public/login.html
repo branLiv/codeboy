@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/jquery-slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/register.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <title></title>
+</head>
+<body>
+<!--公共顶端-->
+<header class="my_head border">
+    <iframe src="./head.html" scrolling="no" frameborder="0"></iframe>
+</header>
+<!--登录-->
+<div class="container">
+    <div class="my_reg_bg pr-5">
+        <div class="my_log p-2">
+            <div class="mt-2 border-bottom border-white pb-2">
+                <span class="text-white h6 mr-5 pr-3 pl-1">登录学子商城</span>
+                <span><a href="#" class="my_a">新用户注册</a></span>
+            </div>
+            <div class="mt-4">
+                <input id="uname" onblur="onblur_uname()" onfocus="onfocus_uname()" type="text" class="form-control my_input1" placeholder="请输入您的用户名"/>
+                <p class="text-white pt-2 pb-2" id="unameMsg"></p>
+            </div>
+            <div class="mt-4">
+                <input id="upwd" onblur="onblur_upwd()" onfocus="onfocus_upwd()" type="text" class="form-control my_input2" placeholder="请输入您的密码"/>
+                <p class="text-white pt-2 pb-2" id="upwdMsg"></p>
+            </div>
+            <div>
+                <input type="checkbox" id="auto" class="align-baseline"/><label for="auto" class="my_font text-white ml-1 align-middle">自动登陆</label>
+                <span><a href="#" class="my_a align-top ml-5 pl-5">忘记密码？</a></span>
+            </div>
+            <div class="mt-2">
+                <input type="button" class="btn btn-info btn-block" onclick="login()" value="登 录"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--公共底端-->
+<footer class="my_foot border">
+    <iframe src="./foot.html" scrolling="no" frameborder="0"></iframe>
+</footer>
+</body>
+</html>
