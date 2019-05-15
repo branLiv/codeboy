@@ -41,4 +41,17 @@ router.get("/check_phone",(req,res)=>{
     })
 })
 
+// 4、用户登录
+router.post("/login",(req,res)=>{
+    pool.query("select * from xz_user where uname=? and upwd=?",[req.body.uname,req.body.upwd],(err,result)=>{
+        if(err) throw err;
+        if(result.length>0){
+            res.send("1");
+        }else{
+            res.send('0');
+        }
+    })
+})
+
+
 module.exports=router;

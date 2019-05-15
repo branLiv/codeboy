@@ -1,4 +1,4 @@
-/*×¢²á*/
+/*×¢ï¿½ï¿½*/
 .my_a{
     color:#fff;
     font-size: 0.8rem;
@@ -32,7 +32,7 @@
     margin-bottom:1.8rem;
     margin-top:1rem;
 }
-/*µÇÂ¼*/
+/*ï¿½ï¿½Â¼*/
 .my_log{
     background:rgba(0,0,0,0.3);
     width:16rem;
@@ -47,4 +47,8 @@
 }
 .my_input2{
     background-image:url("http://www.codeboy.com/img/login/mm.png");
+}
+.my_p{
+    height:2rem;
+    font-size:0.8rem;
 }
