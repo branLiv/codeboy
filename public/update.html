@@ -150,12 +150,10 @@
                 var result=xhr.responseText;
                 // console.log(result);
                 if(result=="1"){
-                    registerMsg.innerHTML="注册成功";
-                    onblur_upwd();
-                    onblur_email();
-                    onblur_phone();
+                    registerMsg.innerHTML="修改成功";
+                    location.href="http://127.0.0.1:3000/detail.html";
                 }else{
-                    registerMsg.innerHTML="注册失败";
+                    registerMsg.innerHTML="修改失败";
                     return;
                 }
             }
