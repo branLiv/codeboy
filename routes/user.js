@@ -53,5 +53,28 @@ router.post("/login",(req,res)=>{
     })
 })
 
+//5、用户检索
+router.get("/detail",(req,res)=>{
+    pool.query("select * from xz_user",(err,result)=>{
+        if(err) throw err;
+        res.send(result);
+    })
+})
+
+//6、删除用户
+router.get("/delete",(req,res)=>{
+    pool.query("delete from xz_user where uid=?",[req.query.uid],(err,result)=>{
+        if(err) throw err;
+        if(result.affectedRows>0){
+            res.send("1");
+        }
+    })
+})
+
+
+
+
+
+
 
 module.exports=router;
