@@ -24,13 +24,13 @@
             <!-- 左 输入区 -->
             <div class="col-8 p-0">
                 <div class="d-flex justify-content-between pt-4 pb-4 pl-3">
-                    <span class="text-white h5">用户变更</span>
+                    <span class="text-white h5">用户资料变更</span>
                     <span><a href="http://127.0.0.1:3000/login.html" class="my_a">直接登陆</a></span>
                 </div>
                 <div class="row ml-0 mr-0 mb-4">
                     <div class="col-4 text-right  p-0 text-white pt-1">用户名：</div>
                     <div class="col-8 p-0">
-                        <input id="uname" onblur="onblur_uname()" onfocus="onfocus_uname()" type="text" class="form-control" placeholder="请输入用户名"/>
+                        <input id="uname" disabled type="text" class="form-control" placeholder="请输入用户名"/>
                     </div>
                 </div>
                 <div class="row ml-0 mr-0 mb-4">
@@ -95,40 +95,17 @@
         var xhr=new XMLHttpRequest();
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4&&xhr.status==200){
-                var result=xhr.responseText;
+                var result=JSON.parse(xhr.responseText);
                 uname.value=result.uname;
                 upwd.value=result.upwd;
                 email.value=result.email;
                 phone.value=result.phone;
             }
         };
-        xhr.open("get","/user/detail?uid="+uid.value,true);
+        xhr.open("get","/user/onelist?uid="+uid.value,true);
         xhr.send();
     }
-    var is_uname=0,is_upwd=0,is_phone=0;
-    function onblur_uname(){
-        if(!uname.value){
-            unameMsg.innerHTML="用户名不能为空";
-            is_uname=0;
-            return;
-        }
-        var xhr=new XMLHttpRequest();
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState==4&&xhr.status==200){
-                var result=xhr.responseText;
-                // console.log(result);
-                if(result=="0"){
-                    unameMsg.innerHTML="该用户已存在";
-                    is_uname=0;
-                }else if(result=="1"){
-                    unameMsg.innerHTML="用户名可以使用";
-                    is_uname=1;
-                }
-            }
-        };
-        xhr.open("get","/user/check?uname="+uname.value,true);
-        xhr.send();
-    }
+    var is_upwd=0,is_phone=0;
     function onblur_upwd(){
         if(!upwd.value){
             upwdMsg.innerHTML="密码不能为空";
@@ -150,33 +127,20 @@
             phoneMsg.innerHTML="手机号不能为空";
             is_phone=0;
             return;
+        }else{
+            phoneMsg.innerHTML="";
+            is_phone=1;
         }
-        var xhr=new XMLHttpRequest();
-        xhr.onreadystatechange=function(){
-            // console.log(xhr);
-            if(xhr.readyState==4&&xhr.status==200){
-                var result=xhr.responseText;
-                if(result=="0"){
-                    phoneMsg.innerHTML="手机号已存在";
-                    is_phone=0;
-                    return;
-                }else{phoneMsg.innerHTML="";is_phone=1;}
-            }
-        };
-        xhr.open("get","/user/check_phone?phone="+phone.value,true);
-        xhr.send();
     }
-    function onfocus_uname(){unameMsg.innerHTML="用户名长度6~9位";}
     function onfocus_upwd(){upwdMsg.innerHTML="密码长度8~12位";}
     function onfocus_email(){emailMsg.innerHTML="请输入正确的邮箱地址";}
     function onfocus_phone(){phoneMsg.innerHTML="手机号11位";}
 
     function update(){
-        onblur_uname();
         onblur_upwd();
         onblur_email();
         onblur_phone();
-        if(!is_uname||!is_upwd||!is_phone){
+        if(!is_upwd||!is_phone){
             registerMsg.innerHTML="提交失败";
             return;
         }
@@ -187,7 +151,6 @@
                 // console.log(result);
                 if(result=="1"){
                     registerMsg.innerHTML="注册成功";
-                    onblur_uname();
                     onblur_upwd();
                     onblur_email();
                     onblur_phone();
@@ -197,9 +160,9 @@
                 }
             }
         };
-        xhr.open("post","/user/register",true);
+        xhr.open("post","/user/update",true);
         xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        var formdata=`uname=${uname.value}&upwd=${upwd.value}&email=${email.value}&phone=${phone.value}`;
+        var formdata=`uid=${uid.value}&upwd=${upwd.value}&email=${email.value}&phone=${phone.value}`;
         xhr.send(formdata);
     }
 </script>

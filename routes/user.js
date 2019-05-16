@@ -85,8 +85,8 @@ router.post("/update",(req,res)=>{
 router.get("/onelist",(req,res)=>{
     pool.query("select * from xz_user where uid=?",[req.query.uid],(err,result)=>{
         if(err) throw err;
-        res.send(result);
-        console.log(result);
+        res.send(result[0]);
+        console.log(result[0]);
     })
 })
 
