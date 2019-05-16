@@ -56,7 +56,7 @@
                             <td>${result[i].phone}</td>
                             <td>
                                 <a href='javascript:userDelete(${result[i].uid})' class="text-white" mr-1>删除</a>
-                                <a href="#" class="text-white">更改</a>
+                                <a href='http://127.0.0.1:3000/update.html?uid=${result[i].uid}'target="_self" class="text-white">更改</a>
                                 </td>
                         </tr>`;
                 }

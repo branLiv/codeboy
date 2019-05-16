@@ -71,9 +71,24 @@ router.get("/delete",(req,res)=>{
     })
 })
 
+//7、更改用户
+router.post("/update",(req,res)=>{
+    pool.query("update xz_user set upwd=?,email=?,phone=? where uid=?",[req.body.upwd,req.body.email,req.body.phone,req.body.uid],(err,result)=>{
+        if(err) throw err;
+        if(result.affectedRows>0){
+            res.send("1");
+        }
+    })
+})
 
-
-
+//8、单个用户检索
+router.get("/onelist",(req,res)=>{
+    pool.query("select * from xz_user where uid=?",[req.query.uid],(err,result)=>{
+        if(err) throw err;
+        res.send(result);
+        console.log(result);
+    })
+})
 
 
 
