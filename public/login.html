@@ -23,7 +23,7 @@
         <div class="my_log p-2">
             <div class="mt-2 border-bottom border-white pb-2">
                 <span class="text-white h6 mr-5 pr-3 pl-1">登录学子商城</span>
-                <span><a href="#" class="my_a">新用户注册</a></span>
+                <span><a href="http://127.0.0.1:3000/register.html" class="my_a">新用户注册</a></span>
             </div>
             <div class="mt-4">
                 <input id="uname" onblur="onblur_uname()" type="text" class="form-control my_input1" placeholder="请输入您的用户名"/>
@@ -82,7 +82,7 @@
                 var result=xhr.responseText;
                 if(result=="1"){
                     alert("登录成功");
-                    location.herf="http://127.0.0.1:3000/register.html";
+                    location.href="http://127.0.0.1:3000/detail.html";
                 }else{
                     alert("登录失败");
                 }
